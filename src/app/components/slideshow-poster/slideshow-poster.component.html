@@ -1,0 +1,8 @@
+<ion-slides [options]="slideOpts" class="slide-container">
+  <ion-slide *ngFor="let movie of latestMoviesPoster">
+    <!-- <h1>{{ movie.title }}</h1> -->
+    <ion-card>
+      <img class="poster" [src]="movie.poster_path | image" alt="movie.title">
+    </ion-card>
+  </ion-slide>
+</ion-slides>

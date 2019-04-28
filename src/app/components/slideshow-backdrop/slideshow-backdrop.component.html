@@ -1,0 +1,8 @@
+<ion-slides pager="true" [options]="slideOpts" class="slide-container">
+  <ion-slide *ngFor="let movie of latestMovies">
+    <!-- <h1>{{ movie.title }}</h1> -->
+    <ion-card>
+      <img [src]="movie.backdrop_path | image" alt="movie.title">
+    </ion-card>
+  </ion-slide>
+</ion-slides>

@@ -31,4 +31,9 @@ export class MoviesService {
 
     return this.executeQuery<ResponseMDB>(`/discover/movie?primary_release_date.gte=${dateBegin}&primary_release_date.lte=${dateEnd}`); 
   }
+
+  getPopularMovies() {
+    let query = '/discover/movie?sort_by=popularity.desc';
+    return this.executeQuery<ResponseMDB>(query);
+  }
 }

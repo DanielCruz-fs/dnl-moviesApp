@@ -1,10 +1,44 @@
-<ion-content color="tertiary"> 
-  <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide *ngFor="let movie of latestMovies">
-      <!-- <h1>{{ movie.title }}</h1> -->
-      <ion-card>
-        <img [src]="movie.backdrop_path | image" alt="movie.title">
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
+<ion-content color="tertiary">
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3 class="ion-text-center">Hot Ones</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slideshow-backdrop [latestMovies]="latestMovies"></app-slideshow-backdrop>
+  
+  <div class="container-poster">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-chip color="secondary" id="chip-wanted">
+            <ion-icon name="star" ></ion-icon>
+            <ion-label color="light">Most Wanted</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <app-slideshow-poster [latestMoviesPoster]="latestMovies"></app-slideshow-poster>
+
+    <ion-grid fixed id="rated-container">
+      <ion-row>
+        <ion-col>
+          <ion-chip color="secondary">
+            <ion-icon name="heart" ></ion-icon>
+            <ion-label color="light">Most Rated</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <app-slideshow-poster [latestMoviesPoster]="popularMovies"></app-slideshow-poster>
+
+  </div>
+
+ 
+  
 </ion-content>
