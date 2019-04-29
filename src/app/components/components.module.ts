@@ -5,12 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '../pipes/pipes.module';
 import { SlideshowPosterComponent } from './slideshow-poster/slideshow-poster.component';
 import { SlideshowPairComponent } from './slideshow-pair/slideshow-pair.component';
+import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
   declarations: [
     SlideshowBackdropComponent,
     SlideshowPosterComponent,
-    SlideshowPairComponent
+    SlideshowPairComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,9 @@ import { SlideshowPairComponent } from './slideshow-pair/slideshow-pair.componen
   exports: [
     SlideshowBackdropComponent,
     SlideshowPosterComponent,
-    SlideshowPairComponent
-  ]
+    SlideshowPairComponent,
+    DetailComponent
+  ],
+  entryComponents: [ DetailComponent ] // for creating dynamic components in DOM
 })
 export class ComponentsModule { }

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Movie } from 'src/app/interfaces/interfaces';
+import { ModalController } from '@ionic/angular';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-slideshow-pair',
@@ -8,6 +10,7 @@ import { Movie } from 'src/app/interfaces/interfaces';
 })
 export class SlideshowPairComponent implements OnInit {
   @Input() movies: Movie[] = [];
+  @Output() loadMore = new EventEmitter();
   slideOpts = {
     slidesPerView: 3.3,
     freeMode: true,
@@ -17,8 +20,20 @@ export class SlideshowPairComponent implements OnInit {
     //   disableOnInteraction: false
     // }
   };
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
+
+  onLoadMoreMovies() {
+    this.loadMore.emit();
+  }
+
+  async presentModal(id: string) {
+    const modal = await this.modalController.create({
+      component: DetailComponent,
+      componentProps: { movieId: id }
+    });
+    return await modal.present();
+  }
 
 }

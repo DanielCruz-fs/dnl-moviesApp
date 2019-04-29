@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResponseMDB } from '../interfaces/interfaces';
+import { ResponseMDB, MovieDetails, MovieCredits } from '../interfaces/interfaces';
 
 const URL = environment.url;
 const apiKey = environment.apiKey;
@@ -9,12 +9,13 @@ const apiKey = environment.apiKey;
   providedIn: 'root'
 })
 export class MoviesService {
-
+  private popularPage = 0;
   constructor(private http: HttpClient) { }
 
   private executeQuery<T>(query: string) {
     query = URL + query;
     query += `&api_key=${apiKey}`;
+    //console.log(query);
     return this.http.get<T>(query);
   }
   getLatestMovies() {
@@ -33,7 +34,16 @@ export class MoviesService {
   }
 
   getPopularMovies() {
-    let query = '/discover/movie?sort_by=popularity.desc';
+    this.popularPage++
+    let query = `/discover/movie?sort_by=popularity.desc&page=${this.popularPage}`;
     return this.executeQuery<ResponseMDB>(query);
+  }
+
+  getMovieDetails(movieId: string) {
+    return this.executeQuery<MovieDetails>(`/movie/${movieId}?x=0`);
+  }
+
+  getMovieCredits(movieId: string) {
+    return this.executeQuery<MovieCredits>(`/movie/${movieId}/credits?x=0`);
   }
 }
