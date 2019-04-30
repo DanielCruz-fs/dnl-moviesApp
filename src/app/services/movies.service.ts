@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResponseMDB, MovieDetails, MovieCredits } from '../interfaces/interfaces';
+import { ResponseMDB, MovieDetails, MovieCredits, MovieSearchedMDB } from '../interfaces/interfaces';
 
 const URL = environment.url;
 const apiKey = environment.apiKey;
@@ -45,5 +45,9 @@ export class MoviesService {
 
   getMovieCredits(movieId: string) {
     return this.executeQuery<MovieCredits>(`/movie/${movieId}/credits?x=0`);
+  }
+
+  getSearchedMovie(movie: string) {
+    return this.executeQuery<MovieSearchedMDB>(`/search/movie?query=${movie}`);
   }
 }

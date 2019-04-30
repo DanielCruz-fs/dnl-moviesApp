@@ -15,15 +15,16 @@
       </ion-col>
 
       <ion-col>
-        <ion-item>
+        <ion-item color="secondary">
           <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
           <ion-label>Rating</ion-label>
-          <ion-note slot="end" color="primary">{{ movie.vote_average}}</ion-note>
+          <ion-badge slot="end">{{ movie.vote_average}}</ion-badge>
+    
         </ion-item>
-        <ion-item>
+        <ion-item color="secondary">
             <ion-icon slot="start" name="contacts" color="primary"></ion-icon>
             <ion-label>Votes</ion-label>
-            <ion-note slot="end" color="primary">{{ movie.vote_count}}</ion-note>
+          <ion-badge slot="end">{{ movie.vote_count}}</ion-badge>
           </ion-item>
       </ion-col>
 
