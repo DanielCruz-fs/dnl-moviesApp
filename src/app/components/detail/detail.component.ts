@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
 import { MovieDetails, Cast } from 'src/app/interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
+import { LocalDataService } from 'src/app/services/local-data.service';
 
 @Component({
   selector: 'app-detail',
@@ -24,7 +25,8 @@ export class DetailComponent implements OnInit {
     }
   };
 
-  constructor(private moviesService: MoviesService, private modalController: ModalController) { }
+  constructor(private moviesService: MoviesService, private modalController: ModalController,
+              private localDataService: LocalDataService) { }
 
   ngOnInit() {
     this.moviesService.getMovieDetails(this.movieId).subscribe(data => {
@@ -36,6 +38,10 @@ export class DetailComponent implements OnInit {
 
   closeModal(){
     this.modalController.dismiss();
+  }
+
+  addMovieToStorage() {
+    this.localDataService.saveMovie(this.movie);
   }
 
 }
