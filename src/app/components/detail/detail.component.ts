@@ -14,6 +14,7 @@ export class DetailComponent implements OnInit {
   movie: MovieDetails = { };
   hideText = 200;
   cast: Cast[] = [];
+  starIcon = 'star-outline';
   slideOpts = {
     //initialSlide: 0,
     //speed: 200,
@@ -29,10 +30,13 @@ export class DetailComponent implements OnInit {
               private localDataService: LocalDataService) { }
 
   ngOnInit() {
-    this.moviesService.getMovieDetails(this.movieId).subscribe(data => {
-      //console.log(data);
-      this.movie = data;
+    this.localDataService.existenceMovie(this.movieId).then(resp => {
+      resp ? this.starIcon = 'star' : this.starIcon = 'star-outline';
+      console.log('movie existence',resp);
     });
+    
+
+    this.moviesService.getMovieDetails(this.movieId).subscribe(data => this.movie = data);
     this.moviesService.getMovieCredits(this.movieId).subscribe(data => this.cast = data.cast);
   }
 
@@ -41,7 +45,9 @@ export class DetailComponent implements OnInit {
   }
 
   addMovieToStorage() {
-    this.localDataService.saveMovie(this.movie);
+    let iconStatusSwitch = this.localDataService.saveMovie(this.movie);
+    iconStatusSwitch ? this.starIcon = 'star' : this.starIcon = 'star-outline';
+    // console.log(iconStatusSwitch);
   }
 
 }

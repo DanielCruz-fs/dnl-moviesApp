@@ -9,7 +9,9 @@ import { ToastController } from '@ionic/angular';
 export class LocalDataService {
   moviesStorage: MovieDetails[] = [];
 
-  constructor(private storage: Storage, private toastController: ToastController) { }
+  constructor(private storage: Storage, private toastController: ToastController) {
+    this.loadMoviesFromStorage();
+  }
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -39,6 +41,21 @@ export class LocalDataService {
     }
     this.storage.set('movies', this.moviesStorage);
     this.presentToast(message);
+
+    return !existence;
     
+  }
+
+  async loadMoviesFromStorage() {
+    let moviesArrStorage = await this.storage.get('movies');
+    this.moviesStorage = moviesArrStorage || [];
+    //console.log(this.moviesStorage);
+    return this.moviesStorage;
+  }
+
+  async existenceMovie(id: number) {
+    let arr = await this.loadMoviesFromStorage();
+    let existence = arr.find(m => m.id === id);
+    return (existence) ? true : false;
   }
 }

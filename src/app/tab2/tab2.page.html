@@ -1,16 +1,15 @@
-<ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title>
-      Search Movie
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-toolbar>
-  <ion-searchbar placeholder="Search movie" debounce="700" [value]="searchText" (ionChange)="onSearch($event)"></ion-searchbar>
-</ion-toolbar>
-
-<ion-content color="tertiary">
+<ion-content color="primary">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <h3 class="ion-text-center">Search Movie</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+      
+      <ion-toolbar>
+        <ion-searchbar placeholder="Search movie" debounce="700" [value]="searchText" (ionChange)="onSearch($event)"></ion-searchbar>
+      </ion-toolbar>
 
   <ion-grid *ngIf="loadingStatus">
     <ion-row>

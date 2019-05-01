@@ -18,9 +18,9 @@ import { IonicStorageModule } from '@ionic/storage';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,
-    IonicStorageModule.forRoot()
+    HttpClientModule
   ],
   providers: [
     StatusBar,
